@@ -1,6 +1,7 @@
 package com.niehao.servlet;
 
 import com.niehao.controller.BossController;
+import com.niehao.dto.HttpResult;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -23,10 +24,16 @@ import java.io.IOException;
 public class BossServlet extends HttpServlet {
     private BossController controller;
     public void init(ServletConfig config)throws ServletException{
-
+        controller = new BossController();
     }
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //接受链接
+        String url = req.getRequestURI().replace("/boss/","");
+        //设置初始结果为空
+        HttpResult result = null;
+        // 从数据库拿取数据
 
+        //执行选择目标业务
     }
 }
