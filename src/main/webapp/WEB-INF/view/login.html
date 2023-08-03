@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    引用 reset css   -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/reset.css">
+    <style>
+        body{
+            background-color: rgb(196,225,197);
+
+        }
+        .login_contents{
+            margin-top: 180px;
+            height: 900px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            flex-direction: row;
+
+        }
+        .login_wrap{
+            width: 500px;
+            height: 400px;
+            display: flex;
+            background-color: beige;
+            flex-direction: column;
+            box-shadow: 0 0 9px rgba(156,89,86,0.6);
+        }
+        .login_wrap .register_title{
+            height: 100px;
+            padding: 48px;
+            justify-content: center;
+        }
+        .login_wrap .login_body{
+            height: 200px;
+            justify-content: center;
+
+        }
+        .login_wrap .register_title .login_title{
+            font-size: 24px;
+            padding: 12px;
+            display: flex;
+            justify-content: center;
+        }
+        .login_body .username, .password, .login_btn{
+            font-size: 24px;
+            padding: 12px;
+
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div class="login_contents">
+    <div class="login_wrap">
+        <div class="register_title">
+            <div class="login_title">
+                <h2>Admin-login</h2>
+            </div>
+        </div>
+        <div class="login_body">
+            <form action="/boss/login" method="post">
+
+                <div class="username">
+
+                    <label>
+                        <input type="text" name="username" placeholder="please input account" value="">
+                    </label>
+                </div>
+                <div class="password">
+                    <label>
+                        <input type="text" name="password" placeholder="please input password" value="">
+                    </label>
+                </div>
+                <div class="login_btn">
+                    <input type="submit" value="loginIn">
+                </div>
+                <div class="title">
+                    <p style="color: red">  </p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/static/js/jQuery-2.1.1.js"></script>
+<script>
+    function _login(){
+        //获取输入信息  账号和密码
+        let account = document.querySelector(".username>input[name='usernaem']").value;
+        let password = document.querySelector(".password>input[name='password']").value;
+        //账号密码验证
+        let title = document.querySelector(".title>p");
+        if (account.length === 0){
+            title.innerHTML = '账号不能为空';
+            return;
+        }
+        if (password.length === 0){
+            title.innerHTML = '账号不能为空';
+            return;
+        }
+        //发送ajax请求  ------------------------------------
+        jQuery.ajax("Boss/login",{
+        method:"post",
+            data:{account,password},
+            dataType:"json",
+            success(data){
+            if (data){
+                window.location.href = "/main.html";
+            }else {
+                let title = document.querySelector(".title")
+                title.innerHTML = null;
+            }
+            }
+        })
+        //
+    }
+</script>
+</body>
+</html>
