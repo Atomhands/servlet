@@ -2,6 +2,7 @@ package com.niehao.servlet;
 
 import com.niehao.controller.BossController;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +22,8 @@ import java.io.IOException;
 @WebServlet("/boss/*")
 public class BossServlet extends HttpServlet {
     private BossController controller;
-    {
-        controller = new BossController();
+    public void init(ServletConfig config)throws ServletException{
+
     }
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
