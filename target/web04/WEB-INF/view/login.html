@@ -85,7 +85,7 @@
         </div>
     </div>
 </div>
-</body>
+<script src="/static/js/jQuery-2.1.1.js"></script>
 <script>
     function _login(){
         //获取输入信息  账号和密码
@@ -101,10 +101,22 @@
             title.innerHTML = '账号不能为空';
             return;
         }
-        //发送ajax请求
-        jQuery.ajax("Boss/login",{
-
+        //发送ajax请求  ------------------------------------
+        jQuery.ajax("/Boss/login",{
+        method:"post",
+            data:{account,password},
+            dataType:"json",
+            success(data){
+            if (data){
+                window.location.href = "/main.html";
+            }else {
+                let title = document.querySelector(".title")
+                title.innerHTML = null;
+            }
+            }
         })
+        //
     }
 </script>
+</body>
 </html>

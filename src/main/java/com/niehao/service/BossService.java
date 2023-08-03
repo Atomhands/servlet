@@ -1,6 +1,7 @@
 package com.niehao.service;
 
 import com.niehao.dao.BossDao;
+import com.niehao.pojo.Boss;
 
 /**
  * ClassName: BossService
@@ -15,5 +16,9 @@ public class BossService {
     private BossDao bossDao;
     {
         bossDao = new BossDao();
+    }
+
+    public Boss queryBossAccount(String account) {
+        return bossDao.queryBossAccount(account);
     }
 }

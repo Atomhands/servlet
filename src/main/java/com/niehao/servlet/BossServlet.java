@@ -2,6 +2,7 @@ package com.niehao.servlet;
 
 import com.niehao.controller.BossController;
 import com.niehao.dto.HttpResult;
+import com.niehao.pojo.Boss;
 import com.niehao.utils.DataSourceUtil;
 import com.niehao.utils.JSONUtil;
 
@@ -11,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -60,7 +62,17 @@ public class BossServlet extends HttpServlet {
     }
 
     private HttpResult login(HttpServletRequest req) {
-
-        return null;
+     /*
+     *  username: Boss
+        password: 123456
+     *
+     * */
+        //接受ajax传递的参数
+        String account = req.getParameter("username");
+        String password = req.getParameter("password");
+        //session 保存会话
+        HttpSession session = req.getSession();
+        Boss boss = new Boss(account,password);
+        return controller.login(boss,session);
     }
 }

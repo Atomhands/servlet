@@ -6,16 +6,15 @@
          version="3.1"
          metadata-complete="true">
     <display-name>Archetype Created Web Application</display-name>
-    <welcome-file-list>
-        <welcome-file>/index.jsp</welcome-file>
-        <welcome-file>/index.html</welcome-file>
-    </welcome-file-list>
     <servlet>
-        <servlet-name>boss</servlet-name>
-        <servlet-class>com.niehao.servlet.BossServlet</servlet-class>
+        <servlet-name>view All</servlet-name>
+        <servlet-class>com.niehao.servlet.ViewServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>boss</servlet-name>
-        <url-pattern>/boss/login</url-pattern>
+        <servlet-name>view All</servlet-name>
+        <url-pattern>/login.html</url-pattern>
+        <url-pattern>/main.html</url-pattern>
+
     </servlet-mapping>
 </web-app>

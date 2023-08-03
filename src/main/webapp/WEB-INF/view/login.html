@@ -102,7 +102,7 @@
             return;
         }
         //发送ajax请求  ------------------------------------
-        jQuery.ajax("Boss/login",{
+        jQuery.ajax("/Boss/login",{
         method:"post",
             data:{account,password},
             dataType:"json",
