@@ -21,8 +21,12 @@ public class ViewServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String url = req.getRequestURI();
-        String viewName = "/WEB-INF/view"+url;
+        String viewName;
+        if (url.startsWith("/view")){
+            viewName = "/WEB-INF"+url;
+        }else{
+            viewName = "/WEB-INF/view"+url;
+        }
         req.getRequestDispatcher(viewName).forward(req,resp);
-//        resp.sendRedirect(viewName);
     }
 }

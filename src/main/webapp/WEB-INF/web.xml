@@ -15,6 +15,7 @@
         <servlet-name>view All</servlet-name>
         <url-pattern>/login.html</url-pattern>
         <url-pattern>/main.html</url-pattern>
+        <url-pattern>/view/*</url-pattern>
     </servlet-mapping>
 <!--    <servlet>-->
 <!--        <servlet-name>boss</servlet-name>-->

@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
+
 /**
  * ClassName: BossServlet
  * Package: com.niehao.servlet
@@ -41,7 +42,7 @@ public class BossServlet extends HttpServlet {
             DataSourceUtil.set();
             //执行选择目标业务
             if (url.equals("login")) result =login(req);
-
+            if (url.equals("information")) result = querySelect(req);
 
 
             //commit
@@ -59,6 +60,11 @@ public class BossServlet extends HttpServlet {
         }finally {
             DataSourceUtil.remove();
         }
+    }
+
+    private HttpResult querySelect(HttpServletRequest req) {
+
+        return null;
     }
 
     private HttpResult login(HttpServletRequest req) {
