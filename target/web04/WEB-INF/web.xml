@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
                       http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1"
-         metadata-complete="true">
+         metadata-complete="false">
     <display-name>Archetype Created Web Application</display-name>
     <servlet>
         <servlet-name>view All</servlet-name>
@@ -15,6 +15,13 @@
         <servlet-name>view All</servlet-name>
         <url-pattern>/login.html</url-pattern>
         <url-pattern>/main.html</url-pattern>
-
     </servlet-mapping>
+<!--    <servlet>-->
+<!--        <servlet-name>boss</servlet-name>-->
+<!--        <servlet-class>com.niehao.servlet.BossServlet</servlet-class>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>boss</servlet-name>-->
+<!--        <url-pattern>/boss/login</url-pattern>-->
+<!--    </servlet-mapping>-->
 </web-app>

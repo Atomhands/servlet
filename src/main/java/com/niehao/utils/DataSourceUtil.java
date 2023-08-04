@@ -27,11 +27,9 @@ public class DataSourceUtil {
         try {
             dataSource = new DruidDataSource();
             dataSource.setDriverClassName("oracle.jdbc.OracleDriver");  //加载的驱动类
-            dataSource.setUrl("jdbc:oracle:thin:@192.168.100.100:1521:orcl");
+            dataSource.setUrl("jdbc:oracle:thin:@192.168.172.3:1521:orcl");
             dataSource.setUsername("scott");
             dataSource.setPassword("123456");
-            dataSource.setInitialSize(5);
-            dataSource.setMaxActive(10);
             dataSource.init();
         }catch (SQLException e){
             e.printStackTrace();

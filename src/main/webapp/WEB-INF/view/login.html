@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!--    引用 reset css   -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/static/css/reset.css">
+    <link rel="stylesheet" href="/static/css/reset.css">
     <style>
         body{
             background-color: rgb(196,225,197);
@@ -46,7 +46,6 @@
         .login_body .username, .password, .login_btn{
             font-size: 24px;
             padding: 12px;
-
             display: flex;
             justify-content: center;
         }
@@ -61,21 +60,17 @@
             </div>
         </div>
         <div class="login_body">
-            <form action="/boss/login" method="post">
+            <form>
 
                 <div class="username">
 
-                    <label>
-                        <input type="text" name="username" placeholder="please input account" value="">
-                    </label>
+                        <input type="text" name="account" placeholder="please input account" value="">
                 </div>
                 <div class="password">
-                    <label>
                         <input type="text" name="password" placeholder="please input password" value="">
-                    </label>
                 </div>
-                <div class="login_btn">
-                    <input type="submit" value="loginIn">
+                <div class="login_btn" >
+                    <input type="button" onclick="_login()" value="login">
                 </div>
                 <div class="title">
                     <p style="color: red">  </p>
@@ -89,7 +84,7 @@
 <script>
     function _login(){
         //获取输入信息  账号和密码
-        let account = document.querySelector(".username>input[name='usernaem']").value;
+        let account = document.querySelector(".username>input[name='account']").value;
         let password = document.querySelector(".password>input[name='password']").value;
         //账号密码验证
         let title = document.querySelector(".title>p");
@@ -98,20 +93,20 @@
             return;
         }
         if (password.length === 0){
-            title.innerHTML = '账号不能为空';
+            title.innerHTML = '密码不能为空';
             return;
         }
         //发送ajax请求  ------------------------------------
-        jQuery.ajax("/Boss/login",{
-        method:"post",
+        jQuery.ajax("/boss/login",{
+        method:"POST",
             data:{account,password},
             dataType:"json",
             success(data){
-            if (data){
+            if (true){
                 window.location.href = "/main.html";
             }else {
-                let title = document.querySelector(".title")
-                title.innerHTML = null;
+                let title = document.querySelector(".title>p");
+                title.innerHTML = data.message;
             }
             }
         })

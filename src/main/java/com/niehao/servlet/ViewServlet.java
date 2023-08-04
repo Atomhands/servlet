@@ -23,5 +23,6 @@ public class ViewServlet extends HttpServlet {
         String url = req.getRequestURI();
         String viewName = "/WEB-INF/view"+url;
         req.getRequestDispatcher(viewName).forward(req,resp);
+//        resp.sendRedirect(viewName);
     }
 }

@@ -63,12 +63,12 @@ public class BossServlet extends HttpServlet {
 
     private HttpResult login(HttpServletRequest req) {
      /*
-     *  username: Boss
+     *  account: Boss
         password: 123456
      *
      * */
         //接受ajax传递的参数
-        String account = req.getParameter("username");
+        String account = req.getParameter("account");
         String password = req.getParameter("password");
         //session 保存会话
         HttpSession session = req.getSession();
