@@ -35,4 +35,10 @@ public class BossController {
         session.setAttribute("jobTime",data.getDate());
         return new HttpResult(true,"登陆成功",data,200);
     }
+
+    public HttpResult querySelect(String bossId)throws Exception {
+        //查找用户
+        Boss data = service.findAccount(bossId);
+        return new HttpResult(true,"管理员信息",data,200);
+    }
 }

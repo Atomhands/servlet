@@ -31,6 +31,10 @@
                 //测试
               //  console.log(data)
                 let {account,name,phone,jobTime} = data.data;
+                document.querySelector("#information .account>span").innerHTML = account;
+                document.querySelector("#information .name>span").innerHTML = name;
+                document.querySelector("#information .phone>span").innerHTML = phone;
+                document.querySelector("#information .jobTime>span").innerHTML = jobTime;
 
             }
         })

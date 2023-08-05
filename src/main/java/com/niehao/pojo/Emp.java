@@ -3,52 +3,52 @@ package com.niehao.pojo;
 import java.util.Date;
 
 /**
- * ClassName: Boss
- * Package: com.niehao.pojo
+ * ClassName: Emp
+ * Package: com.niehao.design.pojo
  * Description:
  *
  * @Author NieHao
- * @Create 2023/8/3 18:57
+ * @Create 2023/7/24 16:15
  * @Version 1.0
  */
-public class Boss {
-    private String bossId;
+public class Emp {
+    private String empId;
     private String account;
     private String password;
     private String name;
     private String phone;
-    private Date date;
+    private Date hireDate;
+    private String sal;
+    public Emp(){
 
-    public Boss() {
     }
 
-    public Boss(String account, String password) {
+    public Emp(String account) {
+        this.account = account;
+    }
+
+    public Emp(String account, String password, String phone) {
         this.account = account;
         this.password = password;
-    }
-
-    public Boss(String account, String name, String phone, Date date) {
-        this.account = account;
-        this.name = name;
         this.phone = phone;
-        this.date = date;
     }
 
-    public Boss(String bossId, String account, String password, String name, String phone, Date date) {
-        this.bossId = bossId;
+    public Emp(String empId, String account, String password, String name, String phone, Date hireDate, String sal) {
+        this.empId = empId;
         this.account = account;
         this.password = password;
         this.name = name;
         this.phone = phone;
-        this.date = date;
+        this.hireDate = hireDate;
+        this.sal = sal;
     }
 
-    public String getBossId() {
-        return bossId;
+    public String getEmpId() {
+        return empId;
     }
 
-    public void setBossId(String bossId) {
-        this.bossId = bossId;
+    public void setEmpId(String empId) {
+        this.empId = empId;
     }
 
     public String getAccount() {
@@ -83,23 +83,33 @@ public class Boss {
         this.phone = phone;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getHireDate() {
+        return hireDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate;
     }
+
+    public String getSal() {
+        return sal;
+    }
+
+    public void setSal(String sal) {
+        this.sal = sal;
+    }
+
 
     @Override
     public String toString() {
-        return "Boss{" +
-                "bossId='" + bossId + '\'' +
+        return "Emp{" +
+                "EmpId='" + empId + '\'' +
                 ", account='" + account + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
-                ", date=" + date +
+                ", HireDate=" + hireDate +
+                ", sal=" + sal +
                 '}';
     }
 }

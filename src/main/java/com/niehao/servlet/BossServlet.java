@@ -1,5 +1,6 @@
 package com.niehao.servlet;
 
+import cn.hutool.core.convert.Convert;
 import com.niehao.controller.BossController;
 import com.niehao.dto.HttpResult;
 import com.niehao.pojo.Boss;
@@ -62,9 +63,11 @@ public class BossServlet extends HttpServlet {
         }
     }
 
-    private HttpResult querySelect(HttpServletRequest req) {
-
-        return null;
+    private HttpResult querySelect(HttpServletRequest req)throws Exception {
+        HttpSession session = req.getSession();
+        //通过主键查询 id
+        String bossId = Convert.toStr(session.getAttribute("bossId"));
+        return controller.querySelect(bossId);
     }
 
     private HttpResult login(HttpServletRequest req) {

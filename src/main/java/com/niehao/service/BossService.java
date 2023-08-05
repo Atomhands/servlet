@@ -21,4 +21,8 @@ public class BossService {
     public Boss queryBossAccount(String account) {
         return bossDao.queryBossAccount(account);
     }
+
+    public Boss findAccount(String bossId) throws Exception{
+        return bossDao.findAccount(bossId);
+    }
 }
