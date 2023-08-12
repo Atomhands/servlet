@@ -23,7 +23,7 @@ if (skin && skin != "default") document.write('<link href="' + bootPATH + 'miniu
 if (mode && mode != "default") document.write('<link href="' + bootPATH + 'miniui/themes/default/' + mode + '-mode.css" rel="stylesheet" type="text/css" />');
 
 //icon
-document.write('<link href="' + bootPATH + 'miniui/miniui/themes/icons.css" rel="stylesheet" type="text/css" />');
+document.write('<link href="' + bootPATH + 'miniui/themes/icons.css" rel="stylesheet" type="text/css" />');
 
 
 

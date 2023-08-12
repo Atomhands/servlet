@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="/static/miniui/boot.js"></script>
+</head>
+<body>
+<form id="product-add">
+  <fieldset style="border:solid 1px #aaa;padding:3px;">
+    <legend>基本信息</legend>
+    <div style="padding:5px;" class="informationValidate">
+      <table>
+        <tr>
+          <td style="width:80px;">产品名称</td>
+          <td style="width:150px;">
+            <div class="validateName">
+              <input id="name" name="name" class="mini-textbox"  value=""/>
+            </div>
+          </td>
+<!--          <td style="width:80px;">性别：</td>-->
+<!--          <td>-->
+<!--            <select name="gender" class="radio-button">-->
+<!--              <option value="1">男</option>-->
+<!--              <option value="2">女</option>-->
+<!--            </select>-->
+<!--          </td>-->
+        </tr>
+        <tr>
+          <td>产品价格：</td>
+          <td>
+            <div class="validatePhone">
+              <input id="admin-add-price" name="price" class="mini-textbox"
+                     value=""/>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>产品库存：</td>
+          <td>
+            <input id="admin-add-inventory" name="inventory" class="mini-textbox"
+            />
+          </td>
+<!--          <td>入职时间：</td>-->
+<!--          <td>-->
+<!--            <input name="hireDate" class="mini-datepicker"  emptyText="请选择日期" value=""/>-->
+<!--          </td>-->
+        </tr>
+      </table>
+    </div>
+  </fieldset>
+  <div style="text-align:center;padding:10px;">
+    <a class="mini-button" onclick="saveProduct()" style="width:60px;margin-right:20px;">确定</a>
+    <a class="mini-button" onclick="channel()" style="width:60px;">取消</a>
+    <div class="titleValidate">
+      <p style="color: red"> !!!!!!!!! </p>
+    </div>
+  </div>
+</form>
+<script src="/static/js/jQuery-2.1.1.js"></script>
+<script>
+
+  mini.parse();
+  let adminForm = new mini.Form("product-add");
+
+  function saveProduct() {
+    let data = adminForm.getData(true);
+    jQuery.ajax({
+      url: "/product/addProduct",
+      method: "post",
+      data: data,
+      dataType: "json",
+      success(resp) {
+        if (resp.flag) {
+          mini.showTips({
+            content: resp.message,
+            state: "success",      //default|success|info|warning|danger
+            x: "center",          //left|center|right
+            y: "top",          //top|center|bottom
+            timeout: 2000     //自动消失间隔时间。默认2000（2秒）
+          })
+          channel()
+        } else {
+          mini.showTips({
+            content: resp.message,
+            state: "danger",      //default|success|info|warning|danger
+            x: "center",          //left|center|right
+            y: "top",          //top|center|bottom
+            timeout: 2000     //自动消失间隔时间。默认2000（2秒）
+          })
+
+        }
+      }
+    })
+  }
+
+
+  function channel() {
+    adminForm.clear();
+  }
+</script>
+</body>
+</html>

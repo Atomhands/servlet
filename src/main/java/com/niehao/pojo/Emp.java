@@ -1,5 +1,7 @@
 package com.niehao.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -17,6 +19,7 @@ public class Emp {
     private String password;
     private String name;
     private String phone;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date hireDate;
     private String sal;
     public Emp(){
@@ -31,6 +34,15 @@ public class Emp {
         this.account = account;
         this.password = password;
         this.phone = phone;
+    }
+
+    public Emp(String empId, String account, String name, String phone, Date hireDate, String sal) {
+        this.empId = empId;
+        this.account = account;
+        this.name = name;
+        this.phone = phone;
+        this.hireDate = hireDate;
+        this.sal = sal;
     }
 
     public Emp(String empId, String account, String password, String name, String phone, Date hireDate, String sal) {

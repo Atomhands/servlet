@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background-color: rgb(196,225,197);
+        }
+        #information{
+            margin-top: 48px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>当前登录信息</h1>
+<div id="information">
+    <div class="account">账号: <span></span></div>
+    <div class="name">姓名: <span></span></div>
+    <div class="phone">手机号: <span></span></div>
+    <div class="joinTime">出生日期: <span></span></div>
+</div>
+<script src="/static/js/jQuery-2.1.1.js"></script>
+<script>
+    function _loadUserInformation(){
+        jQuery.ajax("/user/information",{
+            method:"get",
+            dataType:"JSON",
+            success(data){
+                  console.log(data)
+                let {account,name,phone,date} = data.data;
+                document.querySelector("#information .account>span").innerHTML = account;
+                document.querySelector("#information .name>span").innerHTML = name;
+                document.querySelector("#information .phone>span").innerHTML = phone;
+                document.querySelector("#information .joinTime>span").innerHTML = date;
+
+            }
+        })
+    }
+    _loadUserInformation();
+</script>
+</body>
+</html>

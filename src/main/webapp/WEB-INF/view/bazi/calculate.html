@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="/static/miniui/boot.js"></script>
+</head>
+<body>
+    <p>小伙，我看你骨骼精奇</p>
+    <form id="user-bazi" >
+        <fieldset style="border:solid 1px #aaa;padding:3px;">
+            <legend>你当前的八字为:</legend>
+            <table>
+                <div id="dateTimeInformation" class="dateTimeInformation">
+                    <!--HttpResult(isRequest=true, message=true, data=HuangLi(Tyear=癸卯, Tmonth=己未, Tday=壬寅, Thour=丁未-->
+                    <div class="tyear"><span></span>- -</div>
+                    <div class="tmonth"><span></span>- -</div>
+                    <div class="tday"><span></span>- -</div>
+                    <div class="thour"><span></span>- -</div>
+                </div>
+            </table>
+        </fieldset>
+    </form>
+    <form id="admin-add">
+        <fieldset style="border:solid 1px #aaa;padding:3px;">
+            <legend>登陆时出生日期没选对，往下看，在下面的框框里重新选择吧！:</legend>
+            <div style="padding:5px;flex-direction: row;justify-content: center" class="informationValidate">
+                <table>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <label for="birth-date">注意选择时辰哦:</label>
+                            <input id="birth-date"
+                                   name="hireDate" type="datetime-local" required/>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </fieldset>
+        <div style="text-align:center;padding:10px;">
+            <a class="mini-button" onclick="saveTime()" style="width:60px;margin-right:20px;">确定</a>
+            <a class="mini-button" onclick="channelTime()" style="width:60px;">取消</a>
+        </div>
+    </form>
+</body>
+<script src="/static/js/jQuery-2.1.1.js"></script>
+<script>
+    function _toLocalInformation() {
+        $.ajax({
+            url: "/user/getLoginTime",
+            method: "GET",
+            dataType: "json",
+            success(data) {
+                console.log(data)
+                //data=HuangLi(tyear=癸卯, tmonth=己未, tday=壬寅, thour=丁未,
+                let {tyear,tmonth,tday,thour} = data.data;
+                document.querySelector("#dateTimeInformation .tyear>span").innerHTML = tyear;
+                document.querySelector("#dateTimeInformation .tmonth>span").innerHTML = tmonth;
+                document.querySelector("#dateTimeInformation .tday>span").innerHTML = tday;
+                document.querySelector("#dateTimeInformation .thour>span").innerHTML = thour;
+            }
+        })
+    }
+    _toLocalInformation()
+
+    mini.parse();
+    let adminForm = new mini.Form("admin-add");
+
+    function saveTime() {
+        let birthTime = $("#birth-date").val();
+        console.log(birthTime);
+        //console.log(adminForm.validate());
+        jQuery.ajax({
+            url: "/user/saveTime",
+            method: "post",
+            data: {
+                "birthTime": birthTime,
+            },
+            dataType: "json",
+            success(resp) {
+                if (resp.flag) {
+                    mini.showTips({
+                        content: resp.message,
+                        state: "success",      //default|success|info|warning|danger
+                        x: "center",          //left|center|right
+                        y: "top",          //top|center|bottom
+                        timeout: 2000     //自动消失间隔时间。默认2000（2秒）
+                    })
+                    channel()
+                } else {
+                    mini.showTips({
+                        content: resp.message,
+                        state: "danger",      //default|success|info|warning|danger
+                        x: "center",          //left|center|right
+                        y: "top",          //top|center|bottom
+                        timeout: 2000     //自动消失间隔时间。默认2000（2秒）
+                    })
+
+                }
+            }
+        })
+    }
+
+
+    function channelTime() {
+        adminForm.clear();
+    }
+</script>
+</html>

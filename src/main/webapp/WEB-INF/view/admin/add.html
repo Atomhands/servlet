@@ -9,41 +9,43 @@
 <form id="admin-add">
     <fieldset style="border:solid 1px #aaa;padding:3px;">
         <legend>基本信息</legend>
-        <div style="padding:5px;">
+        <div style="padding:5px;" class="informationValidate">
             <table>
                 <tr>
                     <td style="width:80px;">用户姓名</td>
                     <td style="width:150px;">
-                        <input name="name" class="mini-textbox" required="true"/>
+                        <div class="validateName">
+                            <input id="name-validate" name="name" class="mini-textbox"  value="" required/>
+                        </div>
                     </td>
                     <td style="width:80px;">性别：</td>
                     <td>
-                        <select name="gender" class="mini-radiobuttonlist">
+                        <select name="gender" class="radio-button">
                             <option value="1">男</option>
                             <option value="2">女</option>
                         </select>
                     </td>
                 </tr>
                 <tr>
-                    <td>联系方法：</td>
+                    <td>手机号码：</td>
                     <td>
-                        <input id="admin-add-phone" name="phone" onblur="_checkPhone()" class="mini-textbox"
-                               required="true"/>
-                    </td>
-                    <td>出生日期：</td>
-                    <td>
-                        <input name="birth" class="mini-datepicker" required="true" emptyText="请选择日期"/>
+                        <div class="validatePhone">
+                            <input id="admin-add-phone" name="phone" onblur="_checkPhone()" class="mini-textbox"
+                                   value="" required/>
+                        </div>
                     </td>
                 </tr>
                 <tr>
                     <td>薪资待遇：</td>
                     <td>
                         <input id="admin-add-sal" name="sal" class="mini-textbox"
-                               required="true"/>
+                               required />
                     </td>
-                    <td>入职时间：</td>
+                    <td>出生日期：</td>
                     <td>
-                        <input name="birth" class="mini-datepicker" required="true" emptyText="请选择日期"/>
+                        <label for="birth-date">选择出生日期</label>
+                            <input id="birth-date"
+                                   name="hireDate" type="datetime-local"/>
                     </td>
                 </tr>
             </table>
@@ -52,20 +54,56 @@
     <div style="text-align:center;padding:10px;">
         <a class="mini-button" onclick="saveAdmin()" style="width:60px;margin-right:20px;">确定</a>
         <a class="mini-button" onclick="channel()" style="width:60px;">取消</a>
+        <div class="titleValidate">
+            <p style="color: red"> !!!!!!!!! </p>
+        </div>
     </div>
 </form>
 <script src="/static/js/jQuery-2.1.1.js"></script>
 <script>
+    function _checkPhone() {
+        let phone = mini.get("#admin-add-phone").getValue();
+        jQuery.ajax({
+            url: "/admin/checkPhone",
+
+            method: "get",
+            data: {phone},
+            dataType: "json",
+            success(resp) {
+                if (resp==null){
+                    alert("手机号已存在")
+                    adminForm.clear()
+                }
+                console.log(resp)
+            }
+        })
+
+    }
+
+
   mini.parse();
   let adminForm = new mini.Form("admin-add");
 
   function saveAdmin() {
-    // console.log(adminForm.validate());
+      let birthTime = $("#birth-date").val();
+      let name = $("#name-validate").val();
+      let phone = $("#admin-add-phone").val();
+      let sal = $("#admin-add-sal").val();
+      console.log(birthTime);
+      console.log(name);
+      console.log(phone);
+      console.log(sal);
+     console.log(adminForm.validate());
     let data = adminForm.getData(true);
     jQuery.ajax({
       url: "/admin/saveEmp",
       method: "post",
-      data: data,
+      data: {
+          name:data.name,
+          phone:data.phone,
+          sal:data.sal,
+          "hireDate": birthTime,
+      },
       dataType: "json",
       success(resp) {
         if (resp.flag) {
@@ -74,7 +112,7 @@
             state: "success",      //default|success|info|warning|danger
             x: "center",          //left|center|right
             y: "top",          //top|center|bottom
-            timeout: 1000     //自动消失间隔时间。默认2000（2秒）
+            timeout: 2000     //自动消失间隔时间。默认2000（2秒）
           })
           channel()
         } else {
@@ -83,25 +121,14 @@
             state: "danger",      //default|success|info|warning|danger
             x: "center",          //left|center|right
             y: "top",          //top|center|bottom
-            timeout: 1000     //自动消失间隔时间。默认2000（2秒）
+            timeout: 2000     //自动消失间隔时间。默认2000（2秒）
           })
+            
         }
       }
     })
   }
 
-  function _checkPhone() {
-    let phone = mini.get("#admin-add-phone").getValue();
-    jQuery.ajax({
-      url: "/admin/checkPhone",
-      method: "get",
-      data: {phone},
-      dataType: "json",
-      success(resp) {
-        console.log(resp)
-      }
-    })
-  }
 
   function channel() {
     adminForm.clear();

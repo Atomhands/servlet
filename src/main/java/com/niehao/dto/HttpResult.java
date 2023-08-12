@@ -27,4 +27,15 @@ public class HttpResult {
         this.data = data;
         this.code = code;
     }
+
+    public HttpResult(String message, Object data) {
+        this.isRequest = true;
+        this.message = message;
+        this.data = data;
+        this.code = 2000;
+    }
+
+    public static HttpResult Confirm(String message,Object data) {
+        return new HttpResult(message,data);
+    }
 }

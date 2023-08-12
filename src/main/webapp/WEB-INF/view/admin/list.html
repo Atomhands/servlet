@@ -6,7 +6,7 @@
 </head>
 <body>
 <div style="padding-bottom:5px;">
-    <span>员工姓名：</span><input type="text" id="key-phone"/>
+    <span>输入手机号查找：</span><input type="text" id="key-phone"/>
     <input type="button" value="查找" onclick="_searchPhone()"/>
     <input type="button" value="重新加载" onclick="_reload()"/>
 </div>
@@ -15,12 +15,12 @@
      sizeList="[5,10]" pageSize="5" showHeader="true" title="员工列表">
     <div property="columns">
         <div type="indexcolumn"></div>
-        <div field="adminId" sortField="ADMIN_ID" allowSort="true" width="120" headerAlign="center">管理员编码</div>
+        <div field="empId" sortField="ADMIN_ID" allowSort="true" width="120" headerAlign="center">员工编码</div>
         <div field="name" width="120" headerAlign="center">姓名</div>
         <div field="account" width="100" headerAlign="center">账号</div>
         <div field="phone" width="100" headerAlign="center">手机号</div>
-        <div field="createTime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd">创建日期</div>
-        <div field="roleName" width="100" headerAlign="center">角色</div>
+        <div field="hireDate" width="100" headerAlign="center" dateformat="yyyy-MM-dd">入职日期</div>
+        <div field="sal" width="100" headerAlign="center">薪资待遇</div>
     </div>
 
 </div>
@@ -33,7 +33,7 @@
   dataGrid.load();
 
   function _searchPhone() {
-    let phone = document.getElementById("key-phone").value;
+    let phone = $("#key-phone").val();
     dataGrid.load({phone});
   }
 
