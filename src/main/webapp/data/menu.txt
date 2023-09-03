@@ -8,12 +8,9 @@
         { "id": "tjcp", iconCls: "fa fa-leaf", text: "添加产品", url: "/view/product/add.html" },
         { "id": "ckcp", iconCls: "fa fa-book", text: "查看产品", url: "/view/product/list.html" },
         { "id": "djbm", iconCls: "fa fa-barcode", text: "单据编码", url: "pages/1.html" },
-        { "id": "xtgn", iconCls: "fa fa-navicon", text: "系统功能", url: "pages/1.html" },
-        { "id": "xtrz", iconCls: "fa fa-warning", text: "系统日志" },
-        { "id": "sjqxgl", iconCls: "fa fa-briefcase", text: "数据权限管理" }
     ]
     },
-{ "id": "csbz", iconCls: "fa fa-coffee",  text: "测算八字", children: [
+{ "id": "csbz", iconCls: "fa fa-coffee",  text: "功能", children: [
          { "id": "scbz", iconCls: "fa fa-sitemap", text: "生辰八字", url: "/view/bazi/calculate.html" },
          { "id": "zwds", iconCls: "fa fa-th-list", text: "紫微斗数", url: "/view/bazi/ziwei.html" },
          { "id": "gwgl", iconCls: "fa fa-graduation-cap", text: "岗位管理", url: "pages/1.html" },
@@ -21,16 +18,13 @@
          { "id": "yhgl", iconCls: "fa fa-user", text: "用户管理", url: "pages/1.html" }
     ]
 },
-{ "id": "yhzx", iconCls: "fa fa-table", text: "用户中心", children: [
-        { "id": "tjyh", iconCls: "fa fa-puzzle-piece", text: "添加用户", url: "pages/1.html" },
-        { "id": "ckyh", iconCls: "fa fa-list-alt", text: "查看用户", url: "pages/1.html" },
-        { "id": "bdfbsl", iconCls: "fa fa-list-alt", text: "表单发布实例", children: [
-              { "id": "hyda", iconCls: "fa fa-address-card-o", text: "会员档案", url: "pages/1.html" },
-              { "id": "ddgn", iconCls: "fa fa-address-book", text: "订单功能", url: "pages/1.html" },
-              { "id": "qjgl", iconCls: "fa fa-user-circle", text: "请假管理", url: "pages/1.html" },
-              { "id": "csbd", iconCls: "fa fa-bandcamp", text: "测试表单", url: "pages/1.html" }
-            ]
-        }
+{ "id": "yhzxp", iconCls: "fa fa-table", text: "用户中心", children: [
+        { "id": "ckyhp", iconCls: "fa fa-list-alt", text: "查看用户", url: "/view/boss/list.html" }
+    ]
+},
+{ "id": "ddzx", iconCls: "fa fa-table", text: "订单中心", children: [
+        { "id": "ckdd", iconCls: "fa fa-puzzle-piece", text: "查看订单", url: "pages/1.html" },
+        { "id": "ckyh", iconCls: "fa fa-list-alt", text: "更多功能", url: "pages/1.html" },
     ]
 },
 ]

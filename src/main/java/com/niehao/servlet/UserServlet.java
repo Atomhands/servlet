@@ -1,6 +1,7 @@
 package com.niehao.servlet;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.core.util.ObjectUtil;
 import com.niehao.controller.EmpController;
 import com.niehao.controller.UserController;
 import com.niehao.dto.HttpResult;
@@ -53,11 +54,12 @@ public class UserServlet extends HttpServlet {
             DataSourceUtil.set();
             //执行选择目标业务
             if (url.equals("login")) result = login(req);
+            if (url.equals("register")) result = register(req);
             if (url.equals("information")) result = querySelect(req);
-     //       if (url.equals("calculate")) result = selectTime(req);
             if (url.equals("getTime")) result = SysgetTime(req);
             if (url.equals("getLoginTime")) result = UsergetTime(req);
             if (url.equals("saveTime")) result = UsersetTime(req);
+            if (url.equals("list")) result =(HttpResult)listMaster(req,resp);
             //null
             if (result==null) JSONUtil.writeJson(resp, result);
             // commit
@@ -70,12 +72,52 @@ public class UserServlet extends HttpServlet {
 
             String msg = e.getLocalizedMessage();
             //取得异常数据
-            result = new HttpResult(false, msg, null, -400);
+            result = new HttpResult(false, msg, "error", -400);
             JSONUtil.writeJson(resp,result);
             e.printStackTrace();
         } finally {
             DataSourceUtil.remove();
         }
+    }
+
+    private HttpResult register(HttpServletRequest req) throws Exception {
+        //接受ajax传递的参数
+        String account = req.getParameter("account");
+        String password = req.getParameter("password");
+        String birth = req.getParameter("birth");
+        //判断账号是否存在
+        User user = new User();
+        user.setAccount(account);
+
+        if (ObjectUtil.isNotEmpty(controller.queryAccount(account)))
+        {
+            throw new  RuntimeException("账号已存在");
+        }
+        //session 保存会话
+        session = req.getSession();
+
+        user.setPassword(password);
+        user.setName(account);
+        user.setId(UuidUtil.uuid());
+        user.setActive("Y");
+        String birthDate = "";
+        if (birth.contains("T")) {
+            birthDate = birth.replace("T", " ");
+        }
+        System.out.println(birth);
+        System.out.println(birthDate);
+        user.setDate(sdf.parse(birthDate));
+        //存入数据库
+        controller.saveUser(user);
+        //保存登陆的日期
+        session.setAttribute("birthDate",birthDate);
+        return controller.login(user, session);
+    }
+
+    private Object listMaster(HttpServletRequest req,HttpServletResponse resp)throws Exception {
+        AdminServlet servlet = new AdminServlet();
+        EmpController emp = new EmpController();
+        return servlet.listMaster(req,resp);
     }
 
     //重新选择时间 new set session

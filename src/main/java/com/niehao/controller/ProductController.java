@@ -1,8 +1,12 @@
 package com.niehao.controller;
 
 import com.niehao.dto.HttpResult;
+import com.niehao.dto.Page;
 import com.niehao.pojo.Product;
 import com.niehao.service.ProductService;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * ClassName: ProductControl
@@ -23,5 +27,10 @@ public class ProductController {
         product.setKind("洗护 ");
         service.addProduct(product);
         return HttpResult.Confirm("添加产品",null);
+    }
+
+    public Object listProduct(Page page, HttpServletRequest req)throws Exception  {
+        page.setCurrent(page.getCurrent() +1);
+        return service.listProduct(page,req);
     }
 }

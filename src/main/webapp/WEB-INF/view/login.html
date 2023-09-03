@@ -110,8 +110,8 @@
         method:"POST",
             data:{account,password},
             dataType:"json",
-            success(data){
-            if (true){
+            success(resp){
+            if (resp){
                 window.location.href = "/main.html";
             }else {
                 let title = document.querySelector(".title>p");

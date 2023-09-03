@@ -30,7 +30,7 @@ import java.text.SimpleDateFormat;
  */
 @WebServlet("/admin/*")
 public class AdminServlet extends HttpServlet {
-    private SimpleDateFormat sdf;
+    private static SimpleDateFormat sdf;
     private EmpController controller;
     public void init(){
         controller = new EmpController();
@@ -49,6 +49,7 @@ public class AdminServlet extends HttpServlet {
             if (StrUtil.equals("saveEmp",url)) result = saveEmp(req,resp);
             if (StrUtil.equals("list",url)) result = listEmp(req,resp);
             if (StrUtil.equals("checkPhone",url)) result = checkPhone(req,resp);
+            if (StrUtil.equals("removeEmp",url)) result = removeEmp(req,resp);
             if (result==null){
                 JSONUtil.writeJson(resp, result);
             }
@@ -65,6 +66,14 @@ public class AdminServlet extends HttpServlet {
         } finally {
             DataSourceUtil.remove();
         }
+    }
+
+    private Object removeEmp(HttpServletRequest req, HttpServletResponse resp)throws Exception {
+        System.out.println(req.getParameter("hireDateT"));
+        String hireDate = Convert.toStr(req.getParameter("hireDateT"));
+        Emp emp = new Emp();
+        emp.setHireDate(sdf.parse(hireDate));
+        return controller.selectempId(req,emp);
     }
 
 
@@ -84,7 +93,9 @@ public class AdminServlet extends HttpServlet {
         return phone;
     }
 
-
+    public Object listMaster(HttpServletRequest req, HttpServletResponse resp) throws Exception{
+        return listEmp(req,resp);
+    }
     private Object listEmp(HttpServletRequest req, HttpServletResponse resp) throws Exception {
         /*
         *

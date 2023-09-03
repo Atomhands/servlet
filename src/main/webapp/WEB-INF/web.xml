@@ -17,7 +17,10 @@
         <url-pattern>/main.html</url-pattern>
         <url-pattern>/userlogin.html</url-pattern>
         <url-pattern>/usermain.html</url-pattern>
+        <url-pattern>/empmain.html</url-pattern>
+        <url-pattern>/Test.html</url-pattern>
         <url-pattern>/view/*</url-pattern>
+        <url-pattern>/button.html</url-pattern>
     </servlet-mapping>
 <!--    <servlet>-->
 <!--        <servlet-name>boss</servlet-name>-->

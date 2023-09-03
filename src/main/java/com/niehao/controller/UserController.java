@@ -60,4 +60,12 @@ public class UserController {
         //计算八字
         return Bazi.calculate(date[0],date[1],dateT.getMonth(),dateT.getDay(),dateT.getHour());
     }
+
+    public Object queryAccount(String account) throws Exception {
+        return service.queryAccount(account);
+    }
+
+    public void saveUser(User user) throws Exception{
+        service.saveUser(user);
+    }
 }

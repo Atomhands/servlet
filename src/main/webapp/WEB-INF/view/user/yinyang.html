@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="/static/miniui/boot.js"></script>
+</head>
+<body>
+<div id="mainTabs" class="mini-tabs main-tabs" activeIndex="0" style="height:100%;" plain="false"
+     buttons="#tabsButtons" arrowPosition="side">
+<div name="index" iconCls="fa-android" title="自定义起卦">
+    <form id="user-yinyang" >
+        <fieldset style="border:solid 1px #aaa;padding:3px;">
+            <legend>自定义起卦</legend>
+            <table>
+                <div id="dateTimeInformation" class="dateTimeInformation">
+                <p>三数起卦法</p>
+                    <tr>
+                        <td style="width:100px;">请输入第一个数：</td>
+                        <td style="width:150px;"><input id="num1" name="num1" type="text" /></td>
+                        <td style="width:100px;">请输入第二个数：</td>
+                        <td style="width:150px;"><input id="num2" name="num2" type="text" /></td>
+                        <td style="width:100px;">请输入第三个数：</td>
+                        <td style="width:250px;"><input id="num3" name="num3" type="text" /></td>
+                    </tr>点击开始
+                    <input style="width: 150px" type="button" onclick="NumThree()">
+                </div>
+                <p>当前时间</p>
+                <div id="datetime" style="color: red" class="timeTest">
+                    <script>
+                        setInterval("document.getElementById('datetime').innerHTML=new Date().toLocaleString();", 1000);
+                    </script>
+                </div>
+                <div id="titleT">
+                    <p id="message" style="color: red"> --</p>
+                </div>
+            </table>
+        </fieldset>
+    </form>
+</div>
+</div>
+</body>
+<script src="/static/js/jQuery-2.1.1.js"></script>
+<script type="text/javascript">
+    // mini.parse();
+    //
+    // let grid = mini.get("user-yinyang");
+
+
+    function NumThree(){
+        let num1 = $("#num1").val();
+        let num2 = $("#num2").val();
+        let num3 = $("#num3").val();
+        jQuery.ajax({
+            url: "/yinyang/Num3",
+            method: "post",
+            data:{num1,num2,num3},
+            dataType: "json",
+            success(data) {
+                console.log(data)
+                if (data) {
+                    let titleT = document.querySelector(".titleT>p");
+                    console.log(data.message)
+                   // titleT.innerHTML = data.message;
+                    $('#message').text(data.message);
+                }}
+        })
+    }
+</script>
+
+
+</html>

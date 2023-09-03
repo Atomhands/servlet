@@ -1,14 +1,19 @@
 [
-{ "id": "csbz", iconCls: "fa fa-coffee",  text: "测算八字", children: [
+{ "id": "csbz", iconCls: "fa fa-coffee",  text: "功能", children: [
          { "id": "scbz", iconCls: "fa fa-sitemap", text: "生辰八字", url: "/view/bazi/calculate.html" },
          { "id": "zwds", iconCls: "fa fa-th-list", text: "紫微斗数", url: "/view/bazi/ziwei.html" },
-         { "id": "gwgl", iconCls: "fa fa-graduation-cap", text: "岗位管理", url: "pages/1.html" },
-         { "id": "jsgl", iconCls: "fa fa-paw", text: "角色管理", url: "pages/1.html" },
-         { "id": "yhgl", iconCls: "fa fa-user", text: "用户管理", url: "pages/1.html" }
+         { "id": "gwgl", iconCls: "fa fa-graduation-cap", text: "六爻排盘", url: "pages/1.html" },
+         { "id": "jsgl", iconCls: "fa fa-paw", text: "梅花易数", url: "pages/1.html" },
+         { "id": "yhgl", iconCls: "fa fa-user", text: "小六壬", url: "pages/1.html" },
+         { "id": "zdy", iconCls: "fa fa-user", text: "自定义起卦", url: "/view/user/yinyang.html" }
     ]
 },
 { "id": "1", iconCls: "fa fa-send-o", text: "寻找大师", children: [
-        { "id": "1_1", iconCls: "fa fa-desktop", text: "大师列表", url: "/view/admin/list.html" },
+        { "id": "1_1", iconCls: "fa fa-desktop", text: "大师列表", url: "/view/user/listmaster.html" },
 	    ]
-	}
+	},
+{ "id": "tgcp", iconCls: "fa fa-send-o", text: "特供产品", children: [
+       { "id": "cplb", iconCls: "fa fa-desktop", text: "产品列表", url: "/view/user/listProduct.html" },
+    	]
+    }
 ]

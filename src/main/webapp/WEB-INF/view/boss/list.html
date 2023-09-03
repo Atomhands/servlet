@@ -22,7 +22,7 @@
                     <a class="mini-button" iconCls="icon-remove" onclick="remove()">删除</a>
                 </td>
                 <td style="white-space:nowrap;">
-                    <input id="key" class="mini-textbox" emptyText="请输入产品名" style="width:150px;" onenter="onKeyEnter"/>
+                    <input id="key" class="mini-textbox" emptyText="请输入用户名" style="width:150px;" onenter="onKeyEnter"/>
                     <a class="mini-button" onclick="search()">查询</a>
                 </td>
             </tr>
@@ -30,20 +30,20 @@
     </div>
 </div>
 <div id="datagrid1" class="mini-datagrid" style="width:800px;height:280px;" allowResize="true"
-     url="/product/list"  idField="id" multiSelect="true"
+     url="/boss/listUser"  idField="id" multiSelect="true"
 >
     <div property="columns">
         <!--<div type="indexcolumn"></div>        -->
         <div type="checkcolumn" ></div>
-        <div field="id" width="120" headerAlign="center" allowSort="true">产品编码</div>
-        <div field="name" width="120" headerAlign="center" allowSort="true">产品名</div>
-<!--        <div field="createtime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd" allowSort="true">创建日期</div>-->
+        <div field="id" width="120" headerAlign="center" allowSort="true">用户编码</div>
+        <div field="account" width="120" headerAlign="center" allowSort="true">用户账号</div>
+        <!--        <div field="createtime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd" allowSort="true">创建日期</div>-->
         <div header="基本信息">
             <div property="columns">
-                <div field="price" width="100" renderer="onGenderRenderer">价格</div>
-                <div field="inventory" width="100" allowSort="true">库存</div>
-                <div field="kind" width="100" renderer="onBirthdayRenderer">种类</div>
-                <div field="action" width="100">功效</div>
+                <div field="name" width="100" renderer="onGenderRenderer">用户名</div>
+                <div field="phone" width="100" allowSort="true">手机号</div>
+                <div field="jointime" width="100" renderer="onBirthdayRenderer">注册时间</div>
+                <div field="active" width="100">是否再用</div>
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
         if (row) {
             mini.open({
                 url: bootPATH + "../demo/CommonLibs/EmployeeWindow.html",
-                title: "编辑产品", width: 600, height: 400,
+                title: "编辑", width: 600, height: 400,
                 onload: function () {
                     var iframe = this.getIFrameEl();
                     var data = { action: "edit", id: row.id };

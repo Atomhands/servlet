@@ -23,10 +23,19 @@ public class Product {
     private String inventory;
     private String photo;
     private String kind;
-
+    private String action;
     public Product(String name, String price, String inventory) {
         this.name = name;
         this.price = price;
         this.inventory = inventory;
+    }
+
+    public Product(String id, String name, String price, String inventory, String kind, String action) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.inventory = inventory;
+        this.kind = kind;
+        this.action = action;
     }
 }

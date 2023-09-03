@@ -24,4 +24,12 @@ public class UserService {
     public User findAccount(String id)throws Exception {
         return dao.findAccount(id);
     }
+
+    public Object queryAccount(String account) throws Exception {
+        return dao.queryUserAccount(account);
+    }
+
+    public void saveUser(User user)throws Exception {
+        dao.saveUser(user);
+    }
 }

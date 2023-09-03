@@ -38,6 +38,15 @@ public class User {
         this.date = date;
     }
 
+    public User(String id, String account, String name, String phone, Date date, String active) {
+        this.id = id;
+        this.account = account;
+        this.name = name;
+        this.phone = phone;
+        this.date = date;
+        this.active = active;
+    }
+
     public String getId() {
         return id;
     }

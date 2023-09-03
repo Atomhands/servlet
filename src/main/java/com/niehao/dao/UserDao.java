@@ -3,6 +3,7 @@ package com.niehao.dao;
 import com.niehao.pojo.Boss;
 import com.niehao.pojo.User;
 import com.niehao.utils.DataSourceUtil;
+import com.niehao.utils.DateToTimestamp;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,5 +57,18 @@ public class UserDao {
             System.out.println(user);
         }
         return user;
+    }
+
+    public void saveUser(User user)throws Exception {
+        Connection connection = DataSourceUtil.get();
+        PreparedStatement pst = connection.prepareStatement("INSERT INTO TB_USERVIP VALUES(?,?,?,?,?,?,?)");
+        pst.setString(1, user.getId());
+        pst.setString(2, user.getAccount());
+        pst.setString(3, user.getPassword());
+        pst.setString(4, user.getAccount());
+        pst.setString(5, user.getPhone());
+        pst.setTimestamp(6, DateToTimestamp.parseTimeStamp(user.getDate()));
+        pst.setString(7, user.getActive());
+        pst.executeUpdate();
     }
 }

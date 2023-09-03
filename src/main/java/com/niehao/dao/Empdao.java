@@ -5,12 +5,14 @@ import cn.hutool.core.bean.copier.CopyOptions;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
+import com.niehao.dto.HttpResult;
 import com.niehao.dto.Page;
 import com.niehao.pojo.Emp;
 import com.niehao.utils.ConvertToCase;
 import com.niehao.utils.DataSourceUtil;
 import com.niehao.utils.DateToTimestamp;
 
+import javax.servlet.http.HttpServletRequest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -166,5 +168,14 @@ public class Empdao {
             rs.getString(3)
             );}
         return emp;
+    }
+
+    public Object selectempId(HttpServletRequest req, Emp emp)throws Exception {
+        //emp =null;
+        Connection connection = DataSourceUtil.get();
+        PreparedStatement pst = connection.prepareStatement("DELETE ADMIN_EMP where hireDate =?");
+        pst.setTimestamp(1,DateToTimestamp.parseTimeStamp(emp.getHireDate()));
+        pst.executeUpdate();
+        return new HttpResult("删除成功",null);
     }
 }

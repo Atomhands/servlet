@@ -1,7 +1,14 @@
 package com.niehao.service;
 
 import com.niehao.dao.ProductDao;
+import com.niehao.dto.DataGrid;
+import com.niehao.dto.Page;
+import com.niehao.pojo.Emp;
 import com.niehao.pojo.Product;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  * ClassName: ProductService
@@ -21,4 +28,13 @@ public class ProductService {
         public void addProduct(Product product) {
                 dao.addProduct(product);
         }
+
+    public Object listProduct(Page page, HttpServletRequest req)throws Exception {
+        long total = dao.selectAll();
+        List<Product> list = dao.selectList(page,req);
+        DataGrid dataGrid = new DataGrid();
+        dataGrid.setTotal(total);
+        dataGrid.setData(list);
+        return dataGrid;
+    }
 }

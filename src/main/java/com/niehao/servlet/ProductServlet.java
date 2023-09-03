@@ -1,8 +1,10 @@
 package com.niehao.servlet;
 
+import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.StrUtil;
 import com.niehao.controller.ProductController;
 import com.niehao.dto.HttpResult;
+import com.niehao.dto.Page;
 import com.niehao.pojo.Product;
 import com.niehao.utils.DataSourceUtil;
 import com.niehao.utils.JSONUtil;
@@ -34,7 +36,7 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //获取链接
-        String url = req.getRequestURI().replace("/product","");
+        String url = req.getRequestURI().replace("/product/","");
         //存放结果数据
         Object result = null;
         //连接数据库
@@ -42,6 +44,9 @@ public class ProductServlet extends HttpServlet {
             DataSourceUtil.set();
             //判断
             if (StrUtil.equals("addProduct",url)) result = addProduct(req,resp);
+            if (url.equals("list")) result = listProduct(req,resp);
+            //null
+            if (result==null) JSONUtil.writeJson(resp,result);
             //提交 commit
             if (!DataSourceUtil.autoCommit()) DataSourceUtil.commit();
             //响应
@@ -57,6 +62,22 @@ public class ProductServlet extends HttpServlet {
         }finally {
             DataSourceUtil.remove();
         }
+    }
+
+    private Object listProduct(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        /*
+        *
+        * pageIndex: 0
+pageSize: 10
+sortField:
+sortOrder:
+* */
+        int currentP = Convert.toInt(req.getParameter("pageIndex"));
+        int size = Convert.toInt(req.getParameter("pageSize"));
+        String sortField = Convert.toStr(req.getParameter("sortField"));
+        String sortOrder = Convert.toStr(req.getParameter("sortOrder"));
+        Page page = new Page(currentP, size, sortField, sortOrder);
+        return productController.listProduct(page,req);
     }
 
     private Object addProduct(HttpServletRequest req, HttpServletResponse resp) {

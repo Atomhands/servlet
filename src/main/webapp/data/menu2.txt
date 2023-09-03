@@ -1,0 +1,18 @@
+[
+{ "id": "csbz", iconCls: "fa fa-coffee",  text: "功能", children: [
+         { "id": "scbz", iconCls: "fa fa-sitemap", text: "生辰八字", url: "/view/bazi/calculate.html" },
+         { "id": "zwds", iconCls: "fa fa-th-list", text: "紫微斗数", url: "/view/bazi/ziwei.html" },
+         { "id": "gwgl", iconCls: "fa fa-graduation-cap", text: "岗位管理", url: "pages/1.html" },
+         { "id": "jsgl", iconCls: "fa fa-paw", text: "角色管理", url: "pages/1.html" },
+         { "id": "yhgl", iconCls: "fa fa-user", text: "用户管理", url: "pages/1.html" }
+    ]
+},
+{ "id": "1", iconCls: "fa fa-send-o", text: "用户模块", children: [
+        { "id": "1_1", iconCls: "fa fa-desktop", text: "用户列表", url: "/view/emp/listUser.html" },
+	    ]
+	},
+{ "id": "tgcp", iconCls: "fa fa-send-o", text: "特供产品", children: [
+       { "id": "cplb", iconCls: "fa fa-desktop", text: "产品列表", url: "/view/product/list.html" },
+    	]
+    }
+]

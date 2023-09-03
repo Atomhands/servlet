@@ -5,6 +5,7 @@ import com.niehao.dto.DataGrid;
 import com.niehao.dto.Page;
 import com.niehao.pojo.Emp;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -36,5 +37,9 @@ public class EmpService {
 
     public Object selectPhone(String phone) throws Exception{
         return empdao.selectPhone(phone);
+    }
+
+    public Object selectempId(HttpServletRequest req, Emp emp)throws Exception {
+        return empdao.selectempId(req,emp);
     }
 }

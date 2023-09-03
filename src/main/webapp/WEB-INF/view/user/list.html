@@ -2,27 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" http-equiv="content-type" content="text/html">
-    <!--    <link href="static/css/demo.css" rel="stylesheet" type="text/css" />-->
+    <link href="static/css/demo.css" rel="stylesheet" type="text/css" />
     <script src="/static/miniui/boot.js"></script>
     <title>Title</title>
 </head>
 <body>
 <div style="padding-bottom:5px;">
     <span>输入手机号查找：</span><input type="text" id="key-phone"/>
+    <input type="button" value="查找" onclick="_searchPhone()"/>
+    <input type="button" value="重新加载" onclick="_reload()"/>
 </div>
-<div id="admin-list" class="mini-datagrid" style="width: 100%;height: 400px;" url="/admin/list"
-     idField="adminId" ARIA-MULTISELECTABLE="true" allowResize="true"
+<div id="admin-list" class="mini-datagrid" style="width: 100%;height: 400px;" url="/user/list"
+     idField="adminId" multiSelect="true" allowResize="true"
      sizeList="[5,10]" pageSize="5" showHeader="true" title="员工列表">
 
     <div property="columns">
-        <!--        <div type="indexcolumn"></div>-->
-        <div type="checkcolumn" width="50">check</div>
+        <div type="indexcolumn"></div>
+        <div type="checkcolumn"></div>
         <div field="empId"  width="120" headerAlign="center">大师编码</div>
         <div field="name" width="120" headerAlign="center">姓名</div>
         <div field="account" width="100" headerAlign="center">账号</div>
         <div field="phone" width="100" headerAlign="center">手机号</div>
         <div field="hireDate" width="100" headerAlign="center" dateformat="yyyy-MM-dd">入职日期</div>
-        <div sortField="hireDate" allowSort="true" field="Operate" width="100" headeralign="center">点此排序</div>
+        <div sortField="hireDate" allowSort="true" field="Operate" width="100" headeralign="center">操作</div>
     </div>
 
 </div>
@@ -38,14 +40,11 @@
                 <td style="width:100px;">手机号：</td>
                 <td style="width:150px;"><input id="phone" name="phone" class="mini-textbox" /></td>
                 <td style="width:100px;">任职年龄：</td>
-                <td style="width:250px;"><input id="hireDateT" name="hireDate" class="mini-textbox" /></td>
+                <td style="width:250px;"><input id="hireDate" name="hireDate" class="mini-textbox" /></td>
             </tr>
-            <div>
-                <p style="color: red">点此联系大师，解开一生困惑</p>
-                <input type="button" name="Rmaster" style="width: 200px;color: red" onclick="Relation()">
-            </div>
         </table>
     </div>
+    <legend>联系大师，解开前路困惑</legend>
 </fieldset>
 
 
@@ -53,8 +52,6 @@
 <script>
     mini.parse();
     let dataGrid = mini.get("admin-list");
-    let adminForm = new mini.Form("admin-list");
-
     dataGrid.load();
     //绑定表单
     let db = new mini.DataBinding();
@@ -68,32 +65,7 @@
     function _reload() {
         dataGrid.load();
     }
-    let data = adminForm.getData(true);
 
-
-    function _removeRow(){
-        let hireDateT = $("#hireDateT").val();
-        console.log(hireDateT)
-        jQuery.ajax({
-            url: "/admin/removeEmp",
-            method: "post",
-            data:{hireDateT},
-            dataType: "json",
-            success(resp) {
-                if (resp.flag) {
-                    mini.showTips({
-                        content: resp.message,
-                        state: "success",      //default|success|info|warning|danger
-                        x: "center",          //left|center|right
-                        y: "top",          //top|center|bottom
-                        timeout: 2000     //自动消失间隔时间。默认2000（2秒）
-                    })
-                }}
-        })
-    }
-    function saveData(){
-        dataGrid.save();
-    }
 </script>
 </body>
 </html>

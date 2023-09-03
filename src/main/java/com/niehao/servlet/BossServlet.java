@@ -3,6 +3,7 @@ package com.niehao.servlet;
 import cn.hutool.core.convert.Convert;
 import com.niehao.controller.BossController;
 import com.niehao.dto.HttpResult;
+import com.niehao.dto.Page;
 import com.niehao.pojo.Boss;
 import com.niehao.utils.DataSourceUtil;
 import com.niehao.utils.JSONUtil;
@@ -44,8 +45,9 @@ public class BossServlet extends HttpServlet {
             //执行选择目标业务
             if (url.equals("login")) result =login(req);
             if (url.equals("information")) result = querySelect(req);
-
-
+            if (url.equals("listUser")) result = (HttpResult) listUser(req,resp);
+            //null
+            if (result==null) JSONUtil.writeJson(resp, result);
             //commit
             if (!DataSourceUtil.autoCommit()) DataSourceUtil.commit();
             //响应
@@ -61,6 +63,19 @@ public class BossServlet extends HttpServlet {
         }finally {
             DataSourceUtil.remove();
         }
+    }
+
+    private Object listUser(HttpServletRequest req, HttpServletResponse resp)throws Exception {
+//        pageIndex: 0
+//        pageSize: 10
+//        sortField:
+//        sortOrder:
+        int currentU = Convert.toInt(req.getParameter("pageIndex"));
+        int size = Convert.toInt(req.getParameter("pageSize"));
+        String sortField = Convert.toStr(req.getParameter("sortField"));
+        String sortOrder = Convert.toStr(req.getParameter("sortOrder"));
+        Page page = new Page(currentU, size, sortField, sortOrder);
+        return controller.listProduct(page,req);
     }
 
     private HttpResult querySelect(HttpServletRequest req)throws Exception {

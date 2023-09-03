@@ -3,9 +3,11 @@ package com.niehao.controller;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.niehao.dto.HttpResult;
+import com.niehao.dto.Page;
 import com.niehao.pojo.Boss;
 import com.niehao.service.BossService;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -40,5 +42,10 @@ public class BossController {
         //查找用户
         Boss data = service.findAccount(bossId);
         return new HttpResult(true,"管理员信息",data,200);
+    }
+
+    public Object listProduct(Page page, HttpServletRequest req)throws Exception {
+        page.setCurrent(page.getCurrent() +1);
+        return service.listProduct(page,req);
     }
 }

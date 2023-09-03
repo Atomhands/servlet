@@ -22,7 +22,7 @@
                     <a class="mini-button" iconCls="icon-remove" onclick="remove()">删除</a>
                 </td>
                 <td style="white-space:nowrap;">
-                    <input id="key" class="mini-textbox" emptyText="请输入产品名" style="width:150px;" onenter="onKeyEnter"/>
+                    <input id="key" class="mini-textbox" emptyText="请输入姓名" style="width:150px;" onenter="onKeyEnter"/>
                     <a class="mini-button" onclick="search()">查询</a>
                 </td>
             </tr>
@@ -37,7 +37,7 @@
         <div type="checkcolumn" ></div>
         <div field="id" width="120" headerAlign="center" allowSort="true">产品编码</div>
         <div field="name" width="120" headerAlign="center" allowSort="true">产品名</div>
-<!--        <div field="createtime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd" allowSort="true">创建日期</div>-->
+        <!--        <div field="createtime" width="100" headerAlign="center" dateFormat="yyyy-MM-dd" allowSort="true">创建日期</div>-->
         <div header="基本信息">
             <div property="columns">
                 <div field="price" width="100" renderer="onGenderRenderer">价格</div>
@@ -48,6 +48,25 @@
         </div>
     </div>
 </div>
+<fieldset style="width:700px;border:solid 1px #aaa;margin-top:8px;position:relative;">
+    <legend>信息</legend>
+    <div id="editForm1" style="padding:5px;">
+        <input class="mini-hidden" name="id"/>
+        <table style="width:100%;">
+            <tr>
+                <td style="width:100px;">名称：</td>
+                <td style="width:150px;"><input id="name" name="name" class="mini-textbox" /></td>
+                <td style="width:100px;">价格：</td>
+                <td style="width:150px;"><input id="price" name="price" class="mini-textbox" /></td>
+                <td style="width:100px;">功效：</td>
+                <td style="width:250px;"><input id="action" name="action" class="mini-textbox" /></td>
+            </tr>
+        </table>
+        <div>点击购买
+            <input type="button" name="purchase" style="width: 200px;margin-left: 100px;color: red" onclick="purchaseP()">
+        </div>
+    </div>
+</fieldset>
 
 
 <script type="text/javascript">
@@ -57,7 +76,8 @@
     grid.load();
 
     let menu = new ColumnsMenu(grid);
-
+    let db = new mini.DataBinding();
+    db.bindForm("editForm1", dataGrid);
 
     function edit() {
 

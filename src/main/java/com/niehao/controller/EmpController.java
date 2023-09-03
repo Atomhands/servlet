@@ -8,6 +8,7 @@ import com.niehao.service.EmpService;
 import com.niehao.utils.EncryptUtil;
 import com.niehao.utils.UuidUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
@@ -44,5 +45,9 @@ public class EmpController {
 
     public Object selectPhone(String phone) throws Exception{
         return service.selectPhone(phone);
+    }
+
+    public Object selectempId(HttpServletRequest req, Emp emp)throws Exception {
+        return service.selectempId(req,emp);
     }
 }

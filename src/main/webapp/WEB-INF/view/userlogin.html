@@ -73,6 +73,18 @@
             height: 31px;
             font-size: 16px;
         }
+        /*.checkedButton {*/
+        /*    margin-left: 5px;*/
+        /*    border-radius: 5px;*/
+        /*    border-style: hidden;*/
+        /*    height: 15px;*/
+        /*    width: 70px;*/
+        /*    background-color: rgba(216, 191, 216, 0.5);*/
+        /*    outline: none;*/
+        /*    color: #f0edf3;*/
+        /*    padding-left: 10px;*/
+        /*    align-items: center;*/
+        /*}*/
     </style>
 </head>
 
@@ -80,16 +92,23 @@
 <div id="loginDiv">
     <form action="" id="form">
         <h1 style="text-align: center;color: aliceblue;">LOGIN  IN</h1>
-        <p>User Name:<input name="account" id="userNname" type="text"><label id="name_trip"></label></p>
+        <p>User Name:<input name="account" id="userNname" type="text" required><label id="name_trip"></label></p>
 
-        <p>Password:  <input name="password" id="password" type="password"><label id="password_trip"></label></p>
-        <p>选择出生日期:  <input name="hireDate" id="birth-date" type="datetime-local"><label id="birth_trip"></label></p>
+        <p>Password:  <input name="password" id="password" type="password" required
+            maxlength="16" minlength="4"
+        ><label id="password_trip"></label></p>
+        <p>选择出生日期:  <input name="hireDate" id="birth-date" type="datetime-local" required><label id="birth_trip"></label></p>
+        <div id="check" class="checkedButton">
+                <input type="radio" value="员工" name="T" id="Emp"/>员工
+                <input type="radio" value="用户" name="T" id="User"/>用户
+        </div>
         <div id="title">
             <p id="error-message" style="color: red"></p>
         </div>
         <div style="text-align: center;margin-top: 30px;">
             <input type="submit" class="button" value="login up" onclick="_login()">
             <input type="reset" class="button" value="reset">
+            <input type="submit" class="button" value="register" onclick="_register()">
         </div>
     </form>
 </div>
@@ -101,41 +120,55 @@
             event.preventDefault();
         })
     })
-    function _login(){
-        // //获取输入信息  账号和密码
-        // let account = document.querySelector(".loginDiv>input[name='account']").value;
-        // let password = document.querySelector(".loginDiv>input[name='password']").value;
-        // //账号密码验证
-        // let title = document.querySelector(".title>p");
-        // if (account.length === 0){
-        //     title.innerHTML = '账号不能为空';
-        //     return;
-        // }
-        // if (password.length === 0){
-        //     title.innerHTML = '密码不能为空';
-        //     return;
-        // }
-        //发送ajax请求  ------------------------------------
-        let account = $("#userNname").val();
-        let password = $("#password").val();
-        let birth = $("#birth-date").val();
-        console.log(birth)
-        jQuery.ajax("/user/login",{
-            method:"POST",
-            data:{account,password,birth},
-            dataType:"json",
-            success(data){
-                if (true){
-                    window.location.href = "/usermain.html";
-                }else {
-                    let title = document.querySelector(".title>p");
-                    title.innerHTML = data.message;
-                    $('#error-message').text('登录失败：' + data.message);
+    // let radios = $('input:radio[name="T"]:checked').val();
+    // console.log(radios);
+    let emp = $("#Emp").val();
+    // console.log(emp)
+
+        function _login(){
+            //发送ajax请求  ------------------------------------
+            let account = $("#userNname").val();
+            let password = $("#password").val();
+            let birth = $("#birth-date").val();
+            console.log(birth)
+            jQuery.ajax("/user/login",{
+                method:"POST",
+                data:{account,password,birth},
+                dataType:"json",
+                success(resp){
+                    if (resp){
+                        window.location.href = "/usermain.html";
+                    }else {
+                        let title = document.querySelector(".title>p");
+                        title.innerHTML = resp;
+                        $('#error-message').text('登录失败：' + resp+"error");
+                    }
                 }
-            }
-        })
-        //
-    }
+            })
+            //
+        }
+        function _register(){
+            //发送ajax请求  ------------------------------------
+            let account = $("#userNname").val();
+            let password = $("#password").val();
+            let birth = $("#birth-date").val();
+            console.log(birth)
+            jQuery.ajax("/user/register",{
+                method:"POST",
+                data:{account,password,birth},
+                dataType:"json",
+                success(resp){
+                    if (resp){
+                        window.location.href = "/usermain.html";
+                    }else {
+                        let title = document.querySelector(".title>p");
+                        // title.innerHTML = "error";
+                        $('#error-message').text('登录失败：' + resp+"error"+":账号已存在");
+                    }
+                }
+            })
+        }
+
 </script>
 
 </body>
